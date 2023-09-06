@@ -10,7 +10,7 @@ import javax.inject.Inject
 class FavoriteImageDataStore @Inject constructor(
     private val favoriteImagePreferences: DataStore<FavoriteImagePreferences>
 ) {
-    val favoriteImages = favoriteImagePreferences.data
+    val imageResources = favoriteImagePreferences.data
         .map {
             it.favoriteImagePreferencesList.map { favoriteImagePreference ->
                 ImageResource(

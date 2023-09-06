@@ -5,3 +5,8 @@ data class ImageResource(
     val dateTime: String
 )
 
+data class ImageWithFavoriteStatus(
+    val imageResource: ImageResource,
+    val isFavorite: Boolean
+)
+

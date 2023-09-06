@@ -4,6 +4,7 @@ import com.jhkim.core.common.network.CommonDispatchers
 import com.jhkim.core.common.network.Dispatcher
 import com.jhkim.core.datastore.FavoriteImageDataStore
 import com.jhkim.core.model.ImageResource
+import com.jhkim.core.model.ImageWithFavoriteStatus
 import com.jhkim.core.network.ImageNetworkDataSource
 import com.jhkim.core.network.model.NetworkImageResource
 import com.jhkim.core.network.model.NetworkVClipResource
@@ -11,6 +12,7 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.map
 import java.text.SimpleDateFormat
 import javax.inject.Inject
 
@@ -20,7 +22,15 @@ class ImageRepositoryImpl @Inject constructor(
     private val favoriteImageDataStore: FavoriteImageDataStore
 ) : ImageRepository {
 
-    override val favoriteImages: Flow<List<ImageResource>> = favoriteImageDataStore.favoriteImages
+    override val favoriteImages: Flow<List<ImageWithFavoriteStatus>> =
+        favoriteImageDataStore.imageResources.map {
+            it.map { imageResource ->
+                ImageWithFavoriteStatus(
+                    imageResource = imageResource,
+                    isFavorite = true
+                )
+            }
+        }
 
     override fun getImageResources(query: String): Flow<List<ImageResource>> = flow {
 
