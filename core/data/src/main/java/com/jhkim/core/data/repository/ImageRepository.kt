@@ -5,8 +5,12 @@ import kotlinx.coroutines.flow.Flow
 
 interface ImageRepository {
 
-    fun getImageResources(
-        query: String
-    ): Flow<List<ImageResource>>
+    val favoriteImages: Flow<List<ImageResource>>
+
+    fun getImageResources(query: String): Flow<List<ImageResource>>
+
+    suspend fun addFavoriteImageResource(imageResource: ImageResource)
+
+    suspend fun removeFavoriteImageResource(imageResource: ImageResource)
 
 }
