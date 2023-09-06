@@ -1,26 +1,32 @@
 @Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 plugins {
-    alias(libs.plugins.com.android.application)
+    alias(libs.plugins.com.android.library)
     alias(libs.plugins.org.jetbrains.kotlin.android)
     alias(libs.plugins.com.google.dagger.hilt.android)
+    alias(libs.plugins.secrets)
+    id("kotlinx-serialization")
     id("kotlin-kapt")
 }
 
 android {
-    namespace = "com.jhkim.kko"
+    namespace = "com.jhkim.core.network"
     compileSdk = libs.versions.compileSdk.get().toInt()
 
+    buildFeatures {
+        buildConfig = true
+    }
+
     defaultConfig {
-        applicationId = "com.jhkim.kko"
         minSdk = libs.versions.minSdk.get().toInt()
-        targetSdk = libs.versions.targetSdk.get().toInt()
-        versionCode = 1
-        versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
+        debug {
+            isMinifyEnabled = false
+        }
         release {
             isMinifyEnabled = false
             proguardFiles(
@@ -36,10 +42,10 @@ android {
     kotlinOptions {
         jvmTarget = "17"
     }
+}
 
-    buildFeatures {
-        dataBinding = true
-    }
+secrets {
+    defaultPropertiesFileName = "secrets.defaults.properties"
 }
 
 dependencies {
@@ -47,23 +53,17 @@ dependencies {
     implementation(libs.core.ktx)
     implementation(libs.appcompat)
     implementation(libs.material)
-    implementation(libs.constraintlayout)
-    implementation(libs.lifecycle.livedata.ktx)
-    implementation(libs.lifecycle.viewmodel.ktx)
-    implementation(libs.navigation.fragment.ktx)
-    implementation(libs.navigation.ui.ktx)
-
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
 
-    implementation(libs.coil.kt)
-
     implementation(libs.hilt.android)
     kapt(libs.hilt.android.compiler)
 
-    implementation(project(":core:model"))
-    implementation(project(":core:data"))
-    implementation(project(":core:common"))
+    implementation(libs.retrfit)
+    implementation(libs.retrofit.kotlin.serialization)
+    implementation(libs.okhttp3.logging)
 
+    implementation(libs.kotlinx.datetime)
+    implementation(libs.kotlinx.serialization.json)
 }
