@@ -2,7 +2,6 @@ package com.jhkim.kko.ui.search
 
 import android.graphics.Rect
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,10 +13,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.snackbar.Snackbar
-import com.jhkim.core.common.Util
 import com.jhkim.core.common.Util.fromDpToPx
-import com.jhkim.core.model.ImageResource
+import com.jhkim.core.model.ImageWithFavoriteStatus
 import com.jhkim.kko.R
 import com.jhkim.kko.databinding.FragmentSearchBinding
 import com.jhkim.kko.ui.ImageResourceAdapter
@@ -51,8 +48,8 @@ class SearchFragment @Inject constructor() : Fragment() {
             this.viewModel = this@SearchFragment.viewModel
         }
 
-        val imageAdapter = ImageResourceAdapter { imageResource ->
-            imageOnClick(binding.root, imageResource)
+        val imageAdapter = ImageResourceAdapter { imageWithFavoriteStatus ->
+            imageOnClick(imageWithFavoriteStatus)
         }
 
         binding.searchList.apply {
@@ -62,7 +59,7 @@ class SearchFragment @Inject constructor() : Fragment() {
         }
 
         lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.CREATED) {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.CREATED) {
                 viewModel.searchedImages.collect {
                     imageAdapter.submitList(it)
                 }
@@ -72,9 +69,12 @@ class SearchFragment @Inject constructor() : Fragment() {
         return binding.root
     }
 
-    private fun imageOnClick(rootView: View, imageResource: ImageResource) {
-        Log.i("jhkim", "on click : $imageResource")
-        Snackbar.make(rootView, "즐겨찾기", Snackbar.LENGTH_SHORT).show()
+    private fun imageOnClick(imageWithFavoriteStatus: ImageWithFavoriteStatus) {
+        if (imageWithFavoriteStatus.isFavorite) {
+            viewModel.removeFavoriteImage(imageWithFavoriteStatus.imageResource)
+        } else {
+            viewModel.addFavoriteImage(imageWithFavoriteStatus.imageResource)
+        }
     }
 
     override fun onDestroyView() {

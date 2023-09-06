@@ -22,15 +22,7 @@ class ImageRepositoryImpl @Inject constructor(
     private val favoriteImageDataStore: FavoriteImageDataStore
 ) : ImageRepository {
 
-    override val favoriteImages: Flow<List<ImageWithFavoriteStatus>> =
-        favoriteImageDataStore.imageResources.map {
-            it.map { imageResource ->
-                ImageWithFavoriteStatus(
-                    imageResource = imageResource,
-                    isFavorite = true
-                )
-            }
-        }
+    override val favoriteImages: Flow<List<ImageResource>> = favoriteImageDataStore.imageResources
 
     override fun getImageResources(query: String): Flow<List<ImageResource>> = flow {
 
