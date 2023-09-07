@@ -9,4 +9,3 @@ data class ImageWithFavoriteStatus(
     val imageResource: ImageResource,
     val isFavorite: Boolean
 )
-

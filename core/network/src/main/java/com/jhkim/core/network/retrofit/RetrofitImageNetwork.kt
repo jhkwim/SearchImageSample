@@ -20,16 +20,16 @@ private interface KaKaoDeveloperApi {
     suspend fun searchImage(
         @Query("query") query: String,
 //        sort: String,
-//        page: Int,
-//        size: Int
+        @Query("page") page: Int,
+//        @Query("size") size: Int = 6
     ): NetworkImageResource
 
     @GET("v2/search/vclip")
     suspend fun searchVClip(
         @Query("query") query: String,
 //        sort: String,
-//        page: Int,
-//        size: Int
+        @Query("page") page: Int,
+//        @Query("size") size: Int = 6
     ): NetworkVClipResource
 
 }
@@ -49,10 +49,10 @@ class RetrofitImageNetwork @Inject constructor(
         .build()
         .create(KaKaoDeveloperApi::class.java)
 
-    override suspend fun getImageResource(query: String): NetworkImageResource =
-        kaKaoDeveloperApi.searchImage(query = query)
+    override suspend fun getImageResource(query: String, page: Int): NetworkImageResource =
+        kaKaoDeveloperApi.searchImage(query = query, page = page)
 
-    override suspend fun getVClipResource(query: String): NetworkVClipResource =
-        kaKaoDeveloperApi.searchVClip(query = query)
+    override suspend fun getVClipResource(query: String, page: Int): NetworkVClipResource =
+        kaKaoDeveloperApi.searchVClip(query = query, page = page)
 
 }

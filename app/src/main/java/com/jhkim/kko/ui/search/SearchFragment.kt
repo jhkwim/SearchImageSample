@@ -2,6 +2,7 @@ package com.jhkim.kko.ui.search
 
 import android.graphics.Rect
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +14,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.OnScrollListener
 import com.jhkim.core.common.Util.fromDpToPx
 import com.jhkim.core.model.ImageWithFavoriteStatus
 import com.jhkim.kko.R
@@ -53,9 +55,30 @@ class SearchFragment @Inject constructor() : Fragment() {
         }
 
         binding.searchList.apply {
-            layoutManager = GridLayoutManager(context, 4)
+            val layoutManager = GridLayoutManager(context, 4)
+            this.layoutManager = layoutManager
             addItemDecoration(ImageItemDecoration(spanCount = 4, spacing = 16f.fromDpToPx()))
             adapter = imageAdapter
+            addOnScrollListener(object : OnScrollListener() {
+                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                    super.onScrolled(recyclerView, dx, dy)
+
+                    if (viewModel.isLoading.value || viewModel.isLastPage.value) return
+
+                    val visibleItemCount = layoutManager.childCount
+                    val totalItemCount = layoutManager.itemCount
+                    val firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition()
+
+                    // 스크롤이 맨 아래로 내려왔을 때 추가 데이터 로딩
+
+                    if ((visibleItemCount + firstVisibleItemPosition) >= totalItemCount && firstVisibleItemPosition >= 0) {
+                        // 여기에서 추가 데이터를 로드하는 작업을 수행하세요.
+                        // 예를 들어, 네트워크 요청을 보내거나 데이터베이스에서 추가 데이터를 가져올 수 있습니다.
+                        Log.i("jhkim", "loadMore")
+                        viewModel.searchMore()
+                    }
+                }
+            })
         }
 
         lifecycleScope.launch {

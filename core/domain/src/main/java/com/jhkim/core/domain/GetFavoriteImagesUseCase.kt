@@ -1,17 +1,17 @@
 package com.jhkim.core.domain
 
-import com.jhkim.core.data.repository.ImageRepository
+import com.jhkim.core.data.repository.FavoriteImageRepository
 import com.jhkim.core.model.ImageWithFavoriteStatus
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
-class GetFavoriteImages @Inject constructor(
-    private val imageRepository: ImageRepository
+class GetFavoriteImagesUseCase @Inject constructor(
+    private val favoriteImageRepository: FavoriteImageRepository
 ) {
 
     operator fun invoke(): Flow<List<ImageWithFavoriteStatus>> {
-        return imageRepository.favoriteImages.map {
+        return favoriteImageRepository.favoriteImages.map {
             it.map { imageResource ->
                 ImageWithFavoriteStatus(
                     imageResource = imageResource,
