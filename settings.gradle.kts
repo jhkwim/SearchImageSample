@@ -13,10 +13,8 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "KKO"
+rootProject.name = "SearchImageSample"
 include(":app")
-include(":feature:favorites")
-include(":feature:search")
 include(":core:model")
 include(":core:network")
 include(":core:data")

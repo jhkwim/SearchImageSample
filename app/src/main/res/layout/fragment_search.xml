@@ -8,7 +8,7 @@
 
         <variable
             name="viewModel"
-            type="com.jhkim.kko.ui.search.SearchViewModel" />
+            type="com.jhkim.samples.search.ui.search.SearchViewModel" />
 
     </data>
 

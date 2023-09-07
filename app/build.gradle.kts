@@ -7,11 +7,11 @@ plugins {
 }
 
 android {
-    namespace = "com.jhkim.kko"
+    namespace = "com.jhkim.samples.search"
     compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
-        applicationId = "com.jhkim.kko"
+        applicationId = "com.jhkim.samples.search"
         minSdk = libs.versions.minSdk.get().toInt()
         targetSdk = libs.versions.targetSdk.get().toInt()
         versionCode = 1

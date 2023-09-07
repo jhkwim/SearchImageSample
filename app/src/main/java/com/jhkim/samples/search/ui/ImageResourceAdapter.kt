@@ -1,4 +1,4 @@
-package com.jhkim.kko.ui
+package com.jhkim.samples.search.ui
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,8 +7,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.jhkim.core.model.ImageWithFavoriteStatus
-import com.jhkim.kko.R
-import com.jhkim.kko.databinding.ImageItemBinding
+import com.jhkim.samples.search.R
+import com.jhkim.samples.search.databinding.ImageItemBinding
 
 class ImageResourceAdapter(private val onClick: (ImageWithFavoriteStatus) -> Unit) :
     ListAdapter<ImageWithFavoriteStatus, ImageResourceAdapter.ImageViewHolder>(

@@ -1,4 +1,4 @@
-package com.jhkim.kko
+package com.jhkim.samples.search
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp

@@ -1,4 +1,4 @@
-package com.jhkim.kko.ui.search
+package com.jhkim.samples.search.ui.search
 
 import android.util.Log
 import androidx.lifecycle.ViewModel

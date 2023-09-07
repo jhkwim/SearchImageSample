@@ -1,4 +1,4 @@
-package com.jhkim.kko.ui.favorite
+package com.jhkim.samples.search.ui.favorite
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,10 +13,10 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.jhkim.core.common.Util.fromDpToPx
 import com.jhkim.core.model.ImageResource
-import com.jhkim.kko.R
-import com.jhkim.kko.databinding.FragmentFavoriteBinding
-import com.jhkim.kko.ui.ImageResourceAdapter
-import com.jhkim.kko.ui.search.SearchFragment
+import com.jhkim.samples.search.R
+import com.jhkim.samples.search.databinding.FragmentFavoriteBinding
+import com.jhkim.samples.search.ui.ImageResourceAdapter
+import com.jhkim.samples.search.ui.search.SearchFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject

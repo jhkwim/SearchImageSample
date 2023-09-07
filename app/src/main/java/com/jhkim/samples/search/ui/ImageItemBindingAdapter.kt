@@ -1,4 +1,4 @@
-package com.jhkim.kko.ui
+package com.jhkim.samples.search.ui
 
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter

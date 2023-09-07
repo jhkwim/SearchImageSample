@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">KKO</string>
+    <string name="app_name">SearchImageSample</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_search">Search</string>
     <string name="title_favorite">Favorite</string>

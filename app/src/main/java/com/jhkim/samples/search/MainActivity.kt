@@ -1,8 +1,7 @@
-package com.jhkim.kko
+package com.jhkim.samples.search
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -10,8 +9,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigationrail.NavigationRailView
-import com.jhkim.kko.databinding.ActivityMainBinding
-import com.jhkim.kko.ui.BottomNavigationBehavior
+import com.jhkim.samples.search.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

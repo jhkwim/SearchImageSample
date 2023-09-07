@@ -1,15 +1,14 @@
-package com.jhkim.kko.ui
+package com.jhkim.samples.search.ui
 
 import android.content.Context
 import android.util.AttributeSet
 import android.view.Gravity
 import android.view.View
-import android.view.ViewGroup.LayoutParams
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.view.ViewCompat
 import com.google.android.material.snackbar.Snackbar
-import java.lang.Float.min
 import java.lang.Float.max
+import java.lang.Float.min
 
 class BottomNavigationBehavior<V : View>(context: Context, attrs: AttributeSet) :
     CoordinatorLayout.Behavior<V>(context, attrs) {

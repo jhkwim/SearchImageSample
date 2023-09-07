@@ -1,4 +1,4 @@
-package com.jhkim.kko.ui.favorite
+package com.jhkim.samples.search.ui.favorite
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
