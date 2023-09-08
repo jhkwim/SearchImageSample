@@ -4,33 +4,39 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="imageWithFavoriteStatus"
             type="com.jhkim.core.model.ImageWithFavoriteStatus" />
+
+        <variable
+            name="handler"
+            type="com.jhkim.samples.search.ui.ImageResourceAdapter.Handler" />
 
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:onClick="@{() -> handler.onClick(imageWithFavoriteStatus)}">
 
         <ImageView
             android:id="@+id/image"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:load_coil="@{imageWithFavoriteStatus.imageResource.url}"
             app:layout_constraintBottom_toTopOf="@+id/check"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:load_coil="@{imageWithFavoriteStatus.imageResource.url}"
             tools:srcCompat="@tools:sample/avatars" />
 
         <TextView
             android:id="@+id/text_date"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:text="@{imageWithFavoriteStatus.imageResource.dateTime}"
             android:gravity="center"
+            android:text="@{imageWithFavoriteStatus.imageResource.dateTime}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/check"
             app:layout_constraintStart_toStartOf="parent"
@@ -40,7 +46,9 @@
             android:id="@+id/check"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:button="@drawable/selector_favorite_check_background"
             android:checked="@{imageWithFavoriteStatus.isFavorite}"
+            android:onClick="@{() -> handler.onClick(imageWithFavoriteStatus)}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 

@@ -17,22 +17,25 @@ class ImageResourceAdapter(private val onClick: (ImageWithFavoriteStatus) -> Uni
 
     class ImageViewHolder(
         private val binding: ImageItemBinding,
-        private val onClick: (ImageWithFavoriteStatus) -> Unit
+        handler: Handler
     ) : RecyclerView.ViewHolder(binding.root) {
 
         private var currentImageWithFavoriteStatus: ImageWithFavoriteStatus? = null
 
         init {
-            binding.root.setOnClickListener {
-                currentImageWithFavoriteStatus?.let(onClick)
-            }
+            binding.handler = handler
         }
 
         fun bind(imageWithFavoriteStatus: ImageWithFavoriteStatus) {
             currentImageWithFavoriteStatus = imageWithFavoriteStatus
             binding.imageWithFavoriteStatus = imageWithFavoriteStatus
         }
+    }
 
+    class Handler(private val onClickItem: (ImageWithFavoriteStatus) -> Unit) {
+        fun onClick(imageWithFavoriteStatus: ImageWithFavoriteStatus) {
+            onClickItem(imageWithFavoriteStatus)
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImageViewHolder {
@@ -43,7 +46,7 @@ class ImageResourceAdapter(private val onClick: (ImageWithFavoriteStatus) -> Uni
                 parent,
                 false
             ),
-            onClick
+            Handler(onClick)
         )
     }
 
